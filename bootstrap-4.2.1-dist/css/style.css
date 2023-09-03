@@ -6,8 +6,9 @@ body {
  background: #252525;
 }
 
-b, strong {
-    font-weight: 700;
+b,
+strong {
+ font-weight: 700;
 }
 
 .set-left {
@@ -179,6 +180,14 @@ ul.blog li {
   text-align: start;
   padding: 6px 0;
  }
+
+ .brand {
+  position: sticky;
+  top: 55%;
+  -webkit-writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  transform-origin: revert;
+ }
 }
 
 @media(max-width:480px) {
@@ -186,12 +195,13 @@ ul.blog li {
   font-size: 1rem;
  }
 
-.brand {
- position: sticky;
- top: 60%;
- -webkit-writing-mode: vertical-lr;
- transform: rotate(180deg);
-}
+ .brand {
+  position: sticky;
+  top: 55%;
+  -webkit-writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  transform-origin: revert;
+ }
 }
 
 img {
