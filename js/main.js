@@ -108,7 +108,7 @@
    minute = second * 60,
    hour = minute * 60,
    day = hour * 24;
-  let countDown = Date.parse('feb 28, 2025 24:00:00');
+  let countDown = Date.parse('Feb 28, 2025 24:00:00');
   let x = setInterval(function () {
    let now = new Date().getTime();
    let distance = countDown - now;
