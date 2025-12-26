@@ -7,160 +7,477 @@
     <meta name="keywords" content="Chat float button, WordPress Chat plugin, WhatsApp chat plugin">
     <meta name="author" content="Websemporium">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geom:ital,wght@0,300..900;1,300..900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-            background: #f7f7f7;
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background: #25D366;
-            color: #fff;
-            padding: 50px 20px;
-            text-align: center;
-        }
+    :root {
+        --primary: #1a73e8;
+        --primary-dark: #1557b0;
+        --primary-light: #e8f0fe;
+        --accent: #34a853;
+        --accent-hover: #2d8e47;
+        --bg: #ffffff;
+        --bg-alt: #f8f9fa;
+        --card: #ffffff;
+        --text: #202124;
+        --text-secondary: #5f6368;
+        --border: #dadce0;
+        --shadow: rgba(60, 64, 67, 0.3);
+        --shadow-light: rgba(60, 64, 67, 0.08);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    header {
+        background: linear-gradient(135deg, #1a73e8 0%, #4285f4 50%, #669df6 100%);
+        color: #fff;
+        padding: 120px 20px 100px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    header::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -5%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-30px); }
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    header h1 {
+        font-family: 'Geom', sans-serif;
+        font-size: 56px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header p {
+        font-size: 20px;
+        opacity: 0.95;
+        font-weight: 400;
+        line-height: 1.7;
+        max-width: 700px;
+        margin: 0 auto;
+        color: white;
+    }
+
+    .btn {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 16px 40px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(52, 168, 83, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(52, 168, 83, 0.5);
+        background: var(--accent-hover);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    section:nth-child(even) {
+        background: var(--bg-alt);
+    }
+
+    .section-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 50px 40px;
+        background: var(--card);
+        border-radius: 24px;
+        box-shadow: 0 2px 16px var(--shadow-light);
+    }
+
+    h2 {
+        font-family: 'Geom', sans-serif;
+        color: var(--primary);
+        margin-bottom: 30px;
+        font-size: 42px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+        font-size: 18px;
+        color: var(--text-secondary);
+        margin-bottom: 40px;
+    }
+
+    p {
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+        font-size: 16px;
+    }
+
+    ul, ol {
+        padding-left: 24px;
+        color: var(--text-secondary);
+    }
+
+    li {
+        margin-bottom: 14px;
+        font-size: 16px;
+    }
+
+    a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+
+    a:hover {
+        color: var(--primary-dark);
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+    }
+
+    .feature-box {
+        padding: 28px 24px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+        border: 1px solid var(--border);
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--text);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: var(--primary);
+        transition: height 0.3s ease;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px var(--shadow-light);
+        border-color: var(--primary);
+    }
+
+    .feature-box:hover::before {
+        height: 100%;
+    }
+
+    .installation-steps {
+        counter-reset: step-counter;
+        list-style: none;
+        padding: 0;
+    }
+
+    .installation-steps li {
+        counter-increment: step-counter;
+        position: relative;
+        padding: 20px 20px 20px 70px;
+        margin-bottom: 24px;
+        background: var(--bg-alt);
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+        transition: all 0.2s;
+    }
+
+    .installation-steps li:hover {
+        background: var(--primary-light);
+        transform: translateX(4px);
+    }
+
+    .installation-steps li::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        background: var(--primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .screenshots img {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        box-shadow: 0 8px 32px var(--shadow-light);
+        margin-top: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .screenshots img:hover {
+        transform: scale(1.02);
+    }
+
+    .faq-item {
+        margin-bottom: 28px;
+        padding: 24px;
+        background: var(--bg-alt);
+        border-radius: 12px;
+        border-left: 4px solid var(--accent);
+    }
+
+    .faq-item strong {
+        display: block;
+        color: var(--text);
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-family: 'Geologica', sans-serif;
+    }
+
+    .changelog {
+        background: var(--primary-light);
+        padding: 20px 28px;
+        border-radius: 12px;
+        border-left: 4px solid var(--primary);
+    }
+
+    footer {
+        text-align: center;
+        padding: 50px 20px;
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 15px;
+    }
+
+    footer a {
+        color: #fff;
+        font-weight: 600;
+        transition: opacity 0.2s;
+    }
+
+    footer a:hover {
+        opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
         header h1 {
-            margin: 0;
-            font-size: 36px;
+            font-size: 38px;
         }
         header p {
-            font-size: 18px;
-            max-width: 700px;
-            margin: 15px auto;
-        }
-        .btn {
-            display: inline-block;
-            background: #fff;
-            color: #25D366;
-            padding: 12px 25px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        section {
-            padding: 50px 20px;
-            max-width: 1100px;
-            margin: auto;
-            background: #fff;
-            margin-bottom: 30px;
-            border-radius: 8px;
+            font-size: 17px;
         }
         h2 {
-            color: #25D366;
-            margin-bottom: 15px;
+            font-size: 32px;
         }
-        ul {
-            padding-left: 20px;
+        .section-inner {
+            padding: 35px 25px;
+        }
+        section {
+            padding: 50px 0;
         }
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
         }
-        .feature-box {
-            background: #f2fdf7;
-            padding: 20px;
-            border-radius: 6px;
-        }
-        .screenshots img {
-            max-width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #222;
-            color: #ccc;
-            font-size: 14px;
-        }
-        footer a {
-            color: #25D366;
-            text-decoration: none;
-        }
-    </style>
+    }
+</style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>Chat Float Button</h1>
-    <p>
-        A lightweight and flexible WordPress plugin to add a floating WhatsApp chat button
-        with app & web support, custom positioning, icons, and mobile visibility control.
-    </p>
-    <a class="btn" href="#installation">Get Started</a>
+    <div class="header-content">
+        <h1>Chat Float Button</h1>
+        <p>
+            A lightweight and flexible WordPress plugin to add a floating WhatsApp chat button
+            with app & web support, custom positioning, icons, and mobile visibility control.
+        </p>
+        <a class="btn" href="#installation">Get Started</a>
+    </div>
 </header>
 
 <section>
-    <h2>📌 Plugin Description</h2>
-    <p>
-        Chat Float Button allows you to display a floating WhatsApp contact button
-        on your WordPress website. Visitors can instantly start a chat using the WhatsApp
-        mobile app or WhatsApp Web (wa.me).
-    </p>
+    <div class="container">
+        <div class="section-inner">
+            <h2>📌 Plugin Description</h2>
+            <p class="section-subtitle">Connect with your visitors instantly</p>
+            <p>
+                Chat Float Button allows you to display a floating WhatsApp contact button
+                on your WordPress website. Visitors can instantly start a chat using the WhatsApp
+                mobile app or WhatsApp Web (wa.me).
+            </p>
+        </div>
+    </div>
 </section>
 
 <section>
-    <h2>✨ Key Features</h2>
-    <div class="features">
-        <div class="feature-box">✔ Floating WhatsApp button</div>
-        <div class="feature-box">✔ Open in WhatsApp App or Web</div>
-        <div class="feature-box">✔ Bottom percentage positioning</div>
-        <div class="feature-box">✔ Left or Right alignment</div>
-        <div class="feature-box">✔ Hide on mobile option</div>
-        <div class="feature-box">✔ Pre-filled message support</div>
-        <div class="feature-box">✔ Tooltip / hover text</div>
-        <div class="feature-box">✔ Custom icon from plugin folder</div>
-        <div class="feature-box">✔ Lightweight & fast</div>
-        <div class="feature-box">✔ No shortcode required</div>
+    <div class="container">
+        <div class="section-inner">
+            <h2>✨ Key Features</h2>
+            <p class="section-subtitle">Everything you need for seamless customer communication</p>
+            <div class="features">
+                <div class="feature-box">✔ Floating WhatsApp button</div>
+                <div class="feature-box">✔ Open in WhatsApp App or Web</div>
+                <div class="feature-box">✔ Bottom percentage positioning</div>
+                <div class="feature-box">✔ Left or Right alignment</div>
+                <div class="feature-box">✔ Hide on mobile option</div>
+                <div class="feature-box">✔ Pre-filled message support</div>
+                <div class="feature-box">✔ Tooltip / hover text</div>
+                <div class="feature-box">✔ Custom icon from plugin folder</div>
+                <div class="feature-box">✔ Lightweight & fast</div>
+                <div class="feature-box">✔ No shortcode required</div>
+            </div>
+        </div>
     </div>
 </section>
 
 <section id="installation">
-    <h2>⚙ Installation</h2>
-    <ol>
-        <li><a href="/chat-float-button.zip">Download</a> the plugin ZIP file.</li>
-        <li>Upload <strong>chat-float-button</strong> to <code>/wp-content/plugins/</code>.</li>
-        <li>Activate the plugin from the WordPress Plugins page.</li>
-        <li>Go to <strong>Chat Float</strong> in the admin menu.</li>
-        <li>Configure phone number, message, icon, and position.</li>
-    </ol>
+    <div class="container">
+        <div class="section-inner">
+            <h2>⚙ Installation</h2>
+            <p class="section-subtitle">Get up and running in minutes</p>
+            <ol class="installation-steps">
+                <li><a href="/chat-float-button.zip">Download</a> the plugin ZIP file.</li>
+                <li>Upload <strong>chat-float-button</strong> to <code>/wp-content/plugins/</code>.</li>
+                <li>Activate the plugin from the WordPress Plugins page.</li>
+                <li>Go to <strong>Chat Float</strong> in the admin menu.</li>
+                <li>Configure phone number, message, icon, and position.</li>
+            </ol>
+        </div>
+    </div>
 </section>
 
 <section class="screenshots">
-    <h2>🖼 Screenshots</h2>
-    <p><strong>Admin Settings</strong></p>
-    <img src="admin-settings-img.webp" alt="WhatsApp Float Button Admin Settings">
-<!-- 
-    <p><strong>Frontend Floating Button</strong></p>
-    <img src="frontend-button.png" alt="WhatsApp Float Button Frontend"> -->
+    <div class="container">
+        <div class="section-inner">
+            <h2>🖼 Screenshots</h2>
+            <p class="section-subtitle">See the plugin in action</p>
+            <p><strong>Admin Settings</strong></p>
+            <img src="admin-settings-img.webp" alt="WhatsApp Float Button Admin Settings">
+        </div>
+    </div>
 </section>
 
 <section>
-    <h2>❓ Frequently Asked Questions</h2>
+    <div class="container">
+        <div class="section-inner">
+            <h2>❓ Frequently Asked Questions</h2>
+            <p class="section-subtitle">Common questions answered</p>
 
-    <p><strong>Is this plugin free?</strong><br>
-        Yes, it is released under the GPLv2 or later license.
-    </p>
+            <div class="faq-item">
+                <strong>Is this plugin free?</strong>
+                <p>Yes, it is released under the GPLv2 or later license.</p>
+            </div>
 
-    <p><strong>Does it open WhatsApp app or browser?</strong><br>
-        You can choose to open WhatsApp in the native app or via WhatsApp Web (wa.me).
-    </p>
+            <div class="faq-item">
+                <strong>Does it open WhatsApp app or browser?</strong>
+                <p>You can choose to open WhatsApp in the native app or via WhatsApp Web (wa.me).</p>
+            </div>
 
-    <p><strong>Will it slow down my website?</strong><br>
-        No. The plugin is lightweight and optimized for performance.
-    </p>
+            <div class="faq-item">
+                <strong>Will it slow down my website?</strong>
+                <p>No. The plugin is lightweight and optimized for performance.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <section>
-    <h2>🚀 Changelog</h2>
-    <p><strong>1.0.0</strong> – Initial release</p>
+    <div class="container">
+        <div class="section-inner">
+            <h2>🚀 Changelog</h2>
+            <div class="changelog">
+                <strong>Version 1.0.0</strong> – Initial release
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>
